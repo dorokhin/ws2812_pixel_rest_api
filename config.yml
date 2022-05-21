@@ -1,0 +1,4 @@
+server:
+  host: 127.0.0.3
+  port: 8081
+  token: Replace-This-Token
