@@ -24,7 +24,10 @@ func color(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "GET":
-		json.NewEncoder(w).Encode(ws2812Color)
+		err := json.NewEncoder(w).Encode(ws2812Color)
+		if err != nil {
+			w.Write([]byte("failed"))
+		}
 	case "POST":
 		var req Color
 
@@ -35,6 +38,10 @@ func color(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Println(req)
 		ws2812Color = req
-		json.NewEncoder(w).Encode(ws2812Color)
+		err = json.NewEncoder(w).Encode(ws2812Color)
+		if err != nil {
+			w.Write([]byte("failed"))
+		}
 	}
+
 }

@@ -10,7 +10,8 @@ func NewRouter() *http.ServeMux {
 	router := http.NewServeMux()
 	router.Handle("/assets/", assetsFs)
 	router.HandleFunc("/api/health", health)
-	router.HandleFunc("/api/v1/color", color)
+	colorHandler := http.HandlerFunc(color)
+	router.Handle("/api/v1/color", checkTokenAuth(colorHandler))
 	router.HandleFunc("/readme.html", readme)
 	router.HandleFunc("/", index)
 
